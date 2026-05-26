@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MUNRFE App</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="app-header">
+        <div class="logo">
+            <i class="fa-solid fa-globe"></i> MUNRFE
+        </div>
+        <button id="admin-login-btn" class="admin-btn"><i class="fa-solid fa-plus"></i></button>
+    </header>
+
+    <main id="app-content">
+        <section id="tab-news" class="tab-content active">
+            <div id="news-feed" class="feed-container">
+                <div class="loader">Загрузка новостей...</div>
+            </div>
+        </section>
+
+        <section id="tab-events" class="tab-content">
+            <div class="calendar-container">
+                <div class="calendar-header">
+                    <button id="prev-month"><i class="fa-solid fa-chevron-left"></i></button>
+                    <h2 id="month-year"></h2>
+                    <button id="next-month"><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+                <div class="calendar-weekdays">
+                    <span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span>
+                </div>
+                <div id="calendar-grid" class="calendar-grid"></div>
+            </div>
+        </section>
+
+        <section id="tab-members" class="tab-content">
+            <div class="search-container">
+                <i class="fa-solid fa-search"></i>
+                <input type="text" id="member-search" placeholder="Поиск делегатов...">
+            </div>
+            <div id="members-list" class="members-container">
+                <div class="loader">Загрузка участников...</div>
+            </div>
+        </section>
+
+        <section id="tab-hub" class="tab-content">
+            <div class="hub-section">
+                <h3><i class="fa-solid fa-book"></i> Библиотека</h3>
+                <ul class="library-links">
+                    <li><a href="#" target="_blank">Правила процедуры (Rules of Procedure)</a></li>
+                    <li><a href="#" target="_blank">Руководство по написанию резолюций</a></li>
+                    <li><a href="#" target="_blank">Структура ECOSOC</a></li>
+                </ul>
+            </div>
+            <div class="hub-section timer-section">
+                <h3><i class="fa-solid fa-stopwatch"></i> Таймер дебатов</h3>
+                <div class="timer-display" id="timer-display">00:00</div>
+                <div class="timer-controls">
+                    <button id="timer-start" class="btn btn-primary"><i class="fa-solid fa-play"></i></button>
+                    <button id="timer-pause" class="btn btn-warning"><i class="fa-solid fa-pause"></i></button>
+                    <button id="timer-reset" class="btn btn-danger"><i class="fa-solid fa-rotate-left"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <section id="tab-admin" class="tab-content">
+            <h2>Панель управления</h2>
+            <div class="admin-forms">
+                <div class="admin-card">
+                    <h3>Добавить новость</h3>
+                    <input type="text" id="news-title" placeholder="Заголовок">
+                    <textarea id="news-content" placeholder="Текст новости"></textarea>
+                    <input type="text" id="news-image" placeholder="URL картинки (опционально)">
+                    <button id="submit-news" class="btn btn-primary">Опубликовать</button>
+                </div>
+                <div class="admin-card">
+                    <h3>Добавить событие</h3>
+                    <input type="date" id="event-date">
+                    <input type="time" id="event-time">
+                    <input type="text" id="event-title" placeholder="Название события">
+                    <input type="text" id="event-location" placeholder="Место (напр. FEFU, Campus)">
+                    <textarea id="event-desc" placeholder="Описание и Дресс-код"></textarea>
+                    <button id="submit-event" class="btn btn-primary">Добавить в календарь</button>
+                </div>
+                <div class="admin-card">
+                    <h3>Рассылка (Broadcast)</h3>
+                    <textarea id="broadcast-text" placeholder="Текст уведомления для участников"></textarea>
+                    <button id="submit-broadcast" class="btn btn-warning">Отправить всем</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <nav class="bottom-nav">
+        <a href="#" class="nav-item active" data-target="tab-news"><i class="fa-regular fa-newspaper"></i><span>News</span></a>
+        <a href="#" class="nav-item" data-target="tab-events"><i class="fa-regular fa-calendar"></i><span>Events</span></a>
+        <a href="#" class="nav-item" data-target="tab-members"><i class="fa-solid fa-users"></i><span>Members</span></a>
+        <a href="#" class="nav-item" data-target="tab-hub"><i class="fa-solid fa-gavel"></i><span>Hub</span></a>
+    </nav>
+
+    <div id="event-bottom-sheet" class="bottom-sheet">
+        <div class="sheet-handle"></div>
+        <div class="sheet-content">
+            <h2 id="sheet-title">Название</h2>
+            <div class="sheet-meta">
+                <span id="sheet-datetime"><i class="fa-regular fa-clock"></i> Время</span>
+                <span id="sheet-location"><i class="fa-solid fa-location-dot"></i> Место</span>
+            </div>
+            <p id="sheet-desc">Описание</p>
+            <button id="close-sheet" class="btn btn-primary full-width">Закрыть</button>
+        </div>
+    </div>
+    <div id="sheet-overlay" class="overlay"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
